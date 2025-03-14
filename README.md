@@ -1,27 +1,14 @@
-# UserFinanceApp
+# Inerface de gestion des utilisateurs et transactions financières
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.1.
+Cette UI permet à des utilisateurs de gerer leurs transactions financières. Elle est sécurisée avec un mécanisme d'authentification login et Register avant de creer des transactions et de les consulter.
 
-## Development server
+# Components
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. Le Register Component qui pert l'insciption des utilisateurs avec un formulaire et des champs commes le Nom complet l'email et le password
+2. Le Login Component qui permet apre le register de se connecter sur son compte avec son email et son password. Si c'est derniers sont valides l'app te redirige vers les transactions
+3. Le Component Trasanction avec ces deux deux sous components liste et Create qui affiche respectivement la liste des transaction effectues par l'utilisateur et le formulaire pour enregistrer une transaction
 
-## Code scaffolding
+# Securite
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. Login: Connexion grace a un email et un password. Apres verification de l'utilisateur email et mot de pass hashe conforment celui de la base de donne l'api backend nous renvoi un jwtTokent qui code les info du user enregistre sur le localStorage qui va nous permettre de joindre les endpoints transactions du user
+2. Register: Creation d'un utilisateur dans la base de donnee avec hashage du password avec bcrypt
