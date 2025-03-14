@@ -1,0 +1,52 @@
+<div class="row">
+  <!-- Profil utilisateur à gauche -->
+  <div class="col-md-4 col-lg-3 bg-light p-3">
+    <div class="text-center">
+      <img src="https://static.vecteezy.com/system/resources/previews/002/275/847/non_2x/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg" class="rounded-circle" alt="Avatar" width="250" height="250">
+      <h4>{{ user.name }}</h4>
+      <p>{{ user.email }}</p>
+    </div>
+  </div>
+
+  <!-- Liste des transactions à droite -->
+  <div class="col-md-8 col-lg-9 p-3" style="max-height: 70vh; overflow-y: auto;">
+
+    <!-- Message d'erreur -->
+    <div *ngIf="error" class="alert alert-danger">
+      {{ error }}
+    </div>
+  
+    <!-- Message de succès -->
+    <div *ngIf="success" class="alert alert-success">
+      {{ success }}
+    </div>
+  
+    <!-- Formulaire Bootstrap -->
+    <div class="card shadow-sm">
+      <div class="card-header bg-dark text-white">
+        <h5 class="mb-0">Créer une transaction</h5>
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)="createTransaction()">
+          <!-- Montant -->
+          <div class="mb-3 w-50">
+            <label for="amount" class="form-label">Montant</label>
+            <input type="number" id="amount" class="form-control" [(ngModel)]="amount" name="amount" required>
+          </div>
+  
+          <!-- Description -->
+          <div class="mb-3 w-50">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" id="description" class="form-control" [(ngModel)]="description" name="description" required>
+          </div>
+  
+          <!-- Bouton de soumission -->
+          <button type="submit" class="btn btn-dark w-20" [disabled]="loading">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
+            Créer la transaction
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

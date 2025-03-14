@@ -1,0 +1,67 @@
+<div class="row">
+    <!-- Profil utilisateur à gauche -->
+    <div class="col-md-4 col-lg-3 bg-light p-3">
+      <div class="text-center">
+        <img src="https://static.vecteezy.com/system/resources/previews/002/275/847/non_2x/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg" class="rounded-circle" alt="Avatar" width="200" height="200">
+        <h4>{{user.name}}</h4>
+        <p>{{user.email}}</p>
+      </div>
+    </div>
+  
+    <!-- Liste des transactions à droite -->
+    <div class="col-md-8 col-lg-9 p-3" style="max-height: 70vh; overflow-y: auto;">
+  
+      <div *ngIf="loading" class="text-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Chargement...</span>
+        </div>
+      </div>
+  
+      <!-- Message si aucune transaction -->
+      <div *ngIf="!loading && transactions.length === 0" class="text-center mt-5">
+        <p class="fs-5 text-muted">Aucune transaction trouvée.</p>
+        <button class="btn btn-primary" (click)="navigateToCreateTransaction()">Ajouter une transaction</button>
+      </div>
+  
+      <!-- Affichage des transactions -->
+      <div *ngIf="!loading && transactions.length > 0">
+        <div class="card shadow-sm">
+            <div class="card-header bg-dark text-white">
+              <h5 class="mb-0">Liste des Transactions</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-striped table-hover table-bordered">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Montant</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let transaction of transactions" [ngClass]="{'table-light': transaction.amount > 0, 'table-danger': transaction.amount < 0}">
+                    <td>{{ transaction.date | date:'dd/MM/yyyy HH:mm' }}</td>
+                    <td>{{ transaction.amount }}</td>
+                    <td>{{ transaction.description }}</td>
+                    <td>
+                      <button class="btn btn-sm btn-primary me-2" >
+                        <i class="bi bi-pencil"></i> Modifier
+                      </button>
+                      <button class="btn btn-sm btn-danger">
+                        <i class="bi bi-trash"></i> Supprimer
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+  
+        <button class="btn btn-success" (click)="navigateToCreateTransaction()">
+          <i class="bi bi-plus-lg"></i> Ajouter une transaction
+        </button>
+      </div>
+    </div>
+  </div>
